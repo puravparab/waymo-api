@@ -25,7 +25,7 @@ Before you get started, you'll need the following:
 
 1. Install [Android Studio](https://developer.android.com/studio) on your device
 
-2. Create a virtual android device `Projects > More Actions > Device Manager`
+2. Create a virtual android device `Projects > More Actions > Virtual Device Manager`
 
 3. On the virtual device, install the the [Waymo One](https://play.google.com/store/apps/details?id=com.waymo.carapp) application.
 
@@ -52,7 +52,7 @@ Before you get started, you'll need the following:
 	This should run the appium server
 
 
-4. Run the python script
+4. Run the python script in another terminal
 
 	```bash
 	uv run main.py
