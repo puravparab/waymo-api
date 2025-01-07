@@ -13,6 +13,14 @@ Before you get started, you'll need the following:
 - Python
 ```
 
+1. Clone the repository
+
+	```bash
+	git clone git@github.com:puravparab/waymo-api.git
+
+	cd waymo-api
+	```
+
 #### Android Virtual Device
 
 1. Install [Android Studio](https://developer.android.com/studio) on your device
