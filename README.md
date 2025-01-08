@@ -1,6 +1,6 @@
 ### What is this?
 
-Waymo does not have an API where you con get ride prices after entering a pickup point and destination. This is my attempt at building an unofficial api for Waymo that you can run locally and get realtime ride prices. 
+Waymo does not have an API where you can get ride prices after entering a pickup point and destination. This is my attempt at building an unofficial api for Waymo that you can run locally and get realtime ride prices. 
 
 ### Setup
 
