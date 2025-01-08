@@ -4,11 +4,11 @@ Waymo does not have an API where you con get ride prices after entering a pickup
 
 ### Setup
 
-Getting the server setup is a little tedious so bare with me. For now this setup works with MacOS/Linux
+Getting the server setup is a little tedious so bear with me. For now this setup works with MacOS/Linux
 
 Before you get started, you'll need the following:
 ```
-- Android Studio (To run the Waymo application)
+- Android Studio
 - uv (Python package manager)
 - Python
 ```
@@ -56,6 +56,33 @@ Before you get started, you'll need the following:
 
 	```bash
 	uv run main.py
+	```
+
+#### Update location
+
+1. If you want to use Waymo in a different location do this. (You will need to download [adb](#android-debug-bridge))
+	```
+	adb emu geo fix <longitude> <latitude>
+	```
+
+### Developer Usage
+
+#### Android debug bridge
+
+1. For MacOS
+	```
+	brew install android-platform-tools
+	```
+2. For Linux (Ubuntu)
+	```
+	sudo apt install adb
+	```
+
+#### Save screen state
+
+1. You'll need [adb](#android-debug-bridge) for this
+	```bash
+	adb shell uiautomator dump && adb pull /sdcard/window_dump.xml
 	```
 
 ### Contributing / Issues
