@@ -25,11 +25,31 @@ Before you get started, you'll need the following:
 
 1. Install [Android Studio](https://developer.android.com/studio) on your device
 
-2. Create a virtual android device `Projects > More Actions > Virtual Device Manager`
+2. Create a virtual android device `Projects > More Actions > Virtual Device Manager > Select a device`
 
 3. On the virtual device, install the the [Waymo One](https://play.google.com/store/apps/details?id=com.waymo.carapp) application.
 
 4. After the Waymo One application is installed, enter your username and password into the app.
+
+For future uses, you can spin up the virtual device with the Waymo One application as follows:
+
+1. Create a new terminal instance and enter the following:
+	```bash
+	export ANDROID_HOME=$HOME/Library/Android/sdk
+	export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+	export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
+	export PATH=$PATH:$ANDROID_HOME/emulator
+	```
+
+2. Display list of devices in android studio
+	```bash
+	emulator -list-avds
+	```
+
+3. Spin up the virtual android device with the installed Waymo One application
+	```bash
+	emulator -avd <device name>
+	```
 
 #### Python API
 1. Install [uv](https://docs.astral.sh/uv) if you don't have it already
@@ -39,8 +59,7 @@ Before you get started, you'll need the following:
 	uv sync
 	```
 
-3. Run appium in a separate terminal with the following commands
-
+3. Create a new terminal instance and enter the following commands
 	```bash
 	export ANDROID_HOME=$HOME/Library/Android/sdk
 	export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
