@@ -58,21 +58,30 @@ class WaymoClient:
 		except Exception as e:
 			logger.error(f"Failed to connect to Appium: {str(e)}")
 			raise WaymoClientError(f"Appium connection failed: {str(e)}")
-
+	
 	def _handle_app_state(self):
 		"""Handle the Waymo app state (terminate if running, then launch)"""
 		try:
-			state = self.driver.query_app_state(self.app_package)
-			if state > 1:  # 2,3,4 means app is running in some form
-				logger.info("App is running, terminating it...")
-				self.driver.terminate_app(self.app_package)
-				self.wait.until(lambda x: x.query_app_state(self.app_package) <= 1)
-
 			logger.info("Launching Waymo app...")
 			self.driver.activate_app(self.app_package)
 		except Exception as e:
 			logger.error(f"Failed to handle app state: {str(e)}")
 			raise WaymoClientError(f"App state handling failed: {str(e)}")
+
+	def __enter__(self):
+		"""Context manager enter method"""
+		self._connect_to_appium()
+		self._handle_app_state()
+		return self
+
+	def __exit__(self, exc_type, exc_val, exc_tb):
+		"""Context manager exit method"""
+		try:
+			if self.driver:
+				self.driver.quit()
+		except Exception as e:
+			logger.error(f"Error closing driver: {str(e)}")
+			raise WaymoClientError(f"Failed to close driver: {str(e)}")
 
 	def _enter_pickup_location(self, pickup: str):
 		"""Enter and select pickup location"""
@@ -183,21 +192,26 @@ class WaymoClient:
 			logger.error(f"Timeout while extracting trip information: {str(e)}")
 			raise WaymoClientError(f"Failed to extract trip information: {str(e)}")
 
+	def _app_home_screen(self):
+		"""Ensure we're on the app home screen"""
+		try:
+			logger.info("")
+			back_button = self.wait.until(EC.element_to_be_clickable(
+				(AppiumBy.ACCESSIBILITY_ID, "Back")
+			))
+			back_button.click()
+			logger.info("Clicked back button")
+			return
+		except Exception as e:
+			logger.error(f"Error returning to app home screen: {str(e)}")
+			raise WaymoClientError(f"Failed to return app home screen: {str(e)}")
+
 	def get_trip_info(self, pickup: str, dropoff: str) -> TripInfo:
 		try:
-			self._connect_to_appium()
-			self._handle_app_state()
 			self._enter_locations(pickup, dropoff)
-			return self._extract_trip_info(pickup, dropoff)
+			trip_info = self._extract_trip_info(pickup, dropoff)
+			self._app_home_screen()
+			return trip_info
 		except Exception as e:
 			logger.error(f"Error getting trip info: {str(e)}", exc_info=True)
 			raise WaymoClientError(f"Failed to get trip info: {str(e)}")
-
-	def __enter__(self):
-		"""Context manager enter method"""
-		return self
-
-	def __exit__(self, exc_type, exc_val, exc_tb):
-		"""Context manager exit method"""
-		if self.driver:
-			self.driver.quit()
