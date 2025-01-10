@@ -51,6 +51,8 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 	emulator -avd <device name>
 	```
 
+4. Wait for the device to spin up before proceeeding
+
 #### Python API
 1. Install [uv](https://docs.astral.sh/uv) if you don't have it already
 
@@ -59,7 +61,12 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 	uv sync
 	```
 
-3. Create a new terminal instance and enter the following commands
+3. Install appium
+	```bash
+	npm install -g appium
+	```
+
+4. Create a new terminal instance and enter the following commands
 	```bash
 	export ANDROID_HOME=$HOME/Library/Android/sdk
 	export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
@@ -71,7 +78,7 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 	This should run the appium server
 
 
-4. Run the python script in another terminal
+5. Run the python script in another terminal
 
 	```bash
 	uv run main.py
