@@ -109,6 +109,7 @@ class WaymoClient:
 
 		except TimeoutException as e:
 			logger.error(f"Timeout during pickup selection: {str(e)}")
+			self._app_home_screen()
 			raise WaymoClientError(f"Pickup location entry failed: {str(e)}")
 
 
@@ -141,6 +142,7 @@ class WaymoClient:
 
 		except TimeoutException as e:
 			logger.error(f"Timeout during dropoff selection: {str(e)}")
+			self._app_home_screen()
 			raise WaymoClientError(f"Dropoff location entry failed: {str(e)}")
 
 	def _enter_locations(self, pickup: str, dropoff: str):
@@ -190,6 +192,7 @@ class WaymoClient:
 
 		except TimeoutException as e:
 			logger.error(f"Timeout while extracting trip information: {str(e)}")
+			self._app_home_screen()
 			raise WaymoClientError(f"Failed to extract trip information: {str(e)}")
 
 	def _app_home_screen(self):
@@ -214,4 +217,5 @@ class WaymoClient:
 			return trip_info
 		except Exception as e:
 			logger.error(f"Error getting trip info: {str(e)}", exc_info=True)
+			self._app_home_screen()
 			raise WaymoClientError(f"Failed to get trip info: {str(e)}")
