@@ -61,12 +61,7 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 	uv sync
 	```
 
-3. Install appium
-	```bash
-	npm install -g appium
-	```
-
-4. Create a new terminal instance and enter the following commands
+3. Create a new terminal instance and enter the following commands
 	```bash
 	export ANDROID_HOME=$HOME/Library/Android/sdk
 	export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
@@ -78,17 +73,10 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 	This should run the appium server
 
 
-5. Run the python script in another terminal
+4. Run the python script in another terminal
 
 	```bash
-	uv run main.py
-	```
-
-#### Update location
-
-1. If you want to use Waymo in a different location do this. (You will need to download [adb](#android-debug-bridge))
-	```
-	adb emu geo fix <longitude> <latitude>
+	uv run src/waymo_api/main.py
 	```
 
 ### Developer Usage
@@ -104,6 +92,12 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 	sudo apt install adb
 	```
 
+#### Update location
+
+1. If you want to use Waymo in a different location do this. (You will need to download [adb](#android-debug-bridge))
+	```
+	adb emu geo fix <longitude> <latitude>
+	```
 #### Save screen state
 
 1. You'll need [adb](#android-debug-bridge) for this
