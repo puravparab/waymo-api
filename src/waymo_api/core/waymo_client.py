@@ -28,7 +28,7 @@ class WaymoClientError(Exception):
 	pass
 
 class WaymoClient:
-	def __init__(self, device_name: str = 'emulator-5554', timeout: int = 20):
+	def __init__(self, device_name: str = 'emulator-5554', timeout: int = 10):
 		self.platform_name = 'Android'
 		self.device_name = device_name
 		self.timeout = timeout
@@ -45,6 +45,10 @@ class WaymoClient:
 		options.app_package = self.app_package
 		options.app_activity = self.app_activity
 		options.no_reset = True
+		options.set_capability('skipServerInstallation', True)
+		options.set_capability('skipDeviceInitialization', True)
+		options.set_capability('autoGrantPermissions', True)
+		options.set_capability('disableWindowAnimation', True)
 		return options
 
 	def _connect_to_appium(self):
@@ -62,6 +66,12 @@ class WaymoClient:
 	def _handle_app_state(self):
 		"""Handle the Waymo app state (terminate if running, then launch)"""
 		try:
+			# Check if app is already running and in correct state
+			current_activity = self.driver.current_activity
+			if current_activity == self.app_activity:
+				logger.info("App already in correct state")
+				return
+					
 			logger.info("Launching Waymo app...")
 			self.driver.activate_app(self.app_package)
 		except Exception as e:
