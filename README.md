@@ -76,7 +76,7 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 4. Run the python script in another terminal
 
 	```bash
-	uv run src/waymo_api/main.py
+	uv run src/waymo_api/main.py --trip "Fort Mason" "Salesforce Tower"
 	```
 
 ### Developer Usage

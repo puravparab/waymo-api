@@ -1,0 +1,10 @@
+[
+  {
+    "pickup": "Fort Mason",
+    "dropoff": "Salesforce Tower"
+  },
+  {
+    "pickup": "San Francisco City Hall",
+    "dropoff": "501 Twin Peaks Blvd"
+  }
+]
