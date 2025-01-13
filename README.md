@@ -78,6 +78,9 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 	```bash
 	uv run src/waymo_api/main.py --trip "Fort Mason" "Salesforce Tower"
 	```
+	```
+	uv run src/waymo_api/main.py --trips examples/trips.json --workers 1
+	```
 
 ### Developer Usage
 
