@@ -1,7 +1,9 @@
 import json
 import argparse
+from pathlib import Path
 from typing import List, Dict
 from concurrent.futures import ThreadPoolExecutor
+
 from core.client import WaymoClient
 from core.exceptions import WaymoClientError
 from utils.logger import setup_logger, get_logger
@@ -92,6 +94,11 @@ def print_trip_result(result: Dict):
 		print(f"Error: {result['error']}")
 
 def main():
+	project_root = Path(__file__).parent
+	log_dir = project_root / "logs"
+	log_file = log_dir / "main.log"
+	setup_logger(log_level="INFO", log_file=str(log_file))
+
 	args = parse_arguments()
 	try:
 		if args.trip: # Handle single trip from command line
