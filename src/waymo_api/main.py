@@ -94,7 +94,7 @@ def print_trip_result(result: Dict):
 		print(f"Error: {result['error']}")
 
 def main():
-	project_root = Path(__file__).parent
+	project_root = Path(__file__).parent.parent.parent
 	log_dir = project_root / "logs"
 	log_file = log_dir / "main.log"
 	setup_logger(log_level="INFO", log_file=str(log_file))
