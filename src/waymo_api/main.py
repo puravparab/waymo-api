@@ -45,38 +45,47 @@ def load_trips_from_json(file_path):
 	except FileNotFoundError:
 		raise ValueError(f"File not found: {file_path}")
 
-def process_single_trip(trip: Dict[str, str]) -> Dict:
+# def process_trips_parallel(trips: List[Dict[str, str]], max_workers: int) -> List[Dict]:
+# 	"""Process multiple trips in parallel"""
+# 	with ThreadPoolExecutor(max_workers=max_workers) as executor:
+# 		results = list(executor.map(process_single_trip, trips))
+# 	return results
+
+def process_trip(client: WaymoClient, pickup: str, dropoff: str) -> Dict:
 	"""Process a single trip and return results"""
 	try:
-		with WaymoClient() as client:
-			trip_info = client.get_trip_info(
-				pickup=trip["pickup"],
-				dropoff=trip["dropoff"]
-			)
-			return {
-				"pickup": trip["pickup"],
-				"dropoff": trip["dropoff"],
-				"success": True,
-				"results": {
-					"pickup_wait_time": trip_info.pickup_wait_time,
-					"dropoff_time": trip_info.dropoff_time,
-					"price": trip_info.price,
-					"current_time": trip_info.current_time,
-					"time_zone": trip_info.time_zone
-				}
+		trip_info = client.get_trip_info(pickup=pickup, dropoff=dropoff)
+		return {
+			"pickup": pickup,
+			"dropoff": dropoff,
+			"success": True,
+			"results": {
+				"pickup_wait_time": trip_info.pickup_wait_time,
+				"dropoff_time": trip_info.dropoff_time,
+				"price": trip_info.price,
+				"current_time": trip_info.current_time,
+				"time_zone": trip_info.time_zone
 			}
+		}
 	except Exception as e:
 		return {
-			"pickup": trip["pickup"],
-			"dropoff": trip["dropoff"],
+			"pickup": pickup,
+			"dropoff": dropoff,
 			"success": False,
 			"error": str(e)
 		}
 
-def process_trips_parallel(trips: List[Dict[str, str]], max_workers: int) -> List[Dict]:
-	"""Process multiple trips in parallel"""
-	with ThreadPoolExecutor(max_workers=max_workers) as executor:
-		results = list(executor.map(process_single_trip, trips))
+def process_trips(trips: List[Dict[str, str]], max_workers: int = 1) -> List[Dict]:
+	"""Process trips sequentially using a single client"""
+	results = []
+	with WaymoClient() as client:
+		for trip in trips:
+			result = process_trip(
+				client=client,
+				pickup=trip["pickup"],
+				dropoff=trip["dropoff"]
+			)
+			results.append(result)
 	return results
 
 def print_trip_result(result: Dict):
@@ -94,23 +103,23 @@ def print_trip_result(result: Dict):
 		print(f"Error: {result['error']}")
 
 def main():
-	project_root = Path(__file__).parent.parent.parent
+	project_root = Path(__file__).parent
 	log_dir = project_root / "logs"
 	log_file = log_dir / "main.log"
 	setup_logger(log_level="INFO", log_file=str(log_file))
 
 	args = parse_arguments()
 	try:
-		if args.trip: # Handle single trip from command line
-			results = process_single_trip(args.trip[0], args.trip[1])
-		else: # Handle trips from JSON file
+		if args.trip:  # Handle single trip from command line
+			trips = [{"pickup": args.trip[0], "dropoff": args.trip[1]}]
+		else:  # Handle trips from JSON file
 			trips = load_trips_from_json(args.trips)
-			results = process_trips_parallel(trips, args.workers)
+		
+		results = process_trips(trips, args.workers)
 
 		print("\nResults:")
 		for result in results:
 			print_trip_result(result)
-
 		successful = sum(1 for r in results if r['success'])
 		print(f"\nSummary: {successful}/{len(results)} trips completed successfully")
 

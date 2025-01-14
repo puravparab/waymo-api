@@ -10,7 +10,7 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 class WaymoClient:
-	def __init__(self, device_name: str = 'emulator-5554', timeout: int = 10):
+	def __init__(self, device_name: str = 'emulator-5554', timeout: int = 5):
 		self.driver_manager = AppiumDriverManager(device_name, timeout)
 		self.waymo_actions = None
 		self.trip_info_extractor = None

@@ -57,5 +57,4 @@ class TripInfoExtractor:
 
 		except TimeoutException as e:
 			logger.error(f"Timeout while extracting trip information: {str(e)}")
-			self._app_home_screen()
 			raise WaymoClientError(f"Failed to extract trip information: {str(e)}")
