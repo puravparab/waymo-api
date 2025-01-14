@@ -60,21 +60,11 @@ def process_trip(client: WaymoClient, pickup: str, dropoff: str) -> Dict:
 	try:
 		trip_info = client.get_trip_info(pickup=pickup, dropoff=dropoff)
 		return {
-			"pickup": pickup,
-			"dropoff": dropoff,
 			"success": True,
-			"results": {
-				"pickup_wait_time": trip_info.pickup_wait_time,
-				"dropoff_time": trip_info.dropoff_time,
-				"price": trip_info.price,
-				"current_time": trip_info.current_time,
-				"time_zone": trip_info.time_zone
-			}
+			"results": trip_info
 		}
 	except Exception as e:
 		return {
-			"pickup": pickup,
-			"dropoff": dropoff,
 			"success": False,
 			"error": str(e)
 		}
@@ -92,19 +82,37 @@ def process_trips(trips: List[Dict[str, str]], max_workers: int = 1) -> List[Dic
 			results.append(result)
 	return results
 
+
 def print_trip_result(result: Dict):
 	"""Print formatted trip result"""
 	print("\nTrip Details:")
-	print(f"Pickup Location: {result['pickup']}")
-	print(f"Dropoff Location: {result['dropoff']}")
-
 	if result['success']:
-		print(f"Pickup Wait Time: {result['results']['pickup_wait_time']}")
-		print(f"Dropoff Time: {result['results']['dropoff_time']}")
-		print(f"Price: {result['results']['price']}")
-		print(f"Current Time: {result['results']['current_time']} {result['results']['time_zone']}")
+		trip_info = result['results']
+
+		print(f"City: {trip_info['city']}")
+		print(f"Price: {trip_info['price']['currency']} {trip_info['price']['value']}")
+		print(f"Trip Duration: {trip_info['duration']}")
+		print("Current Time:")
+		print(f"  Time: {trip_info['current_datetime']['value']}")
+		print(f"  Date: {trip_info['current_datetime']['date']}")
+		print(f"  Timezone: {trip_info['current_datetime']['time_zone']}")
+
+		print("Pickup:")
+		print(f"  Address: {trip_info['pickup']['location']['address']}")
+		print(f"  City: {trip_info['pickup']['location']['city']}")
+		print(f"  Time: {trip_info['pickup']['pickup_time']}")
+		print(f"  Wait Time: {trip_info['pickup']['wait_time']} minutes")
+		print(f"  Date: {trip_info['pickup']['date']}")
+		print(f"  Timezone: {trip_info['pickup']['time_zone']}")
+
+		print("Dropoff:")
+		print(f"  Address: {trip_info['dropoff']['location']['address']}")
+		print(f"  City: {trip_info['dropoff']['location']['city']}")
+		print(f"  Time: {trip_info['dropoff']['dropoff_time']}")
+		print(f"  Date: {trip_info['dropoff']['date']}")
+		print(f"  Timezone: {trip_info['dropoff']['time_zone']}")
 	else:
-		print(f"Error: {result['error']}")
+			print(f"Error: {result['error']}")
 
 def main():
 	log_dir = root / "logs"
