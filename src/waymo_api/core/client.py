@@ -1,12 +1,12 @@
 from typing import Optional
 import logging
 from .driver import AppiumDriverManager
-from interactions.actions import WaymoActions
-from interactions.info import TripInfoExtractor
+from ..interactions.actions import WaymoActions
+from ..interactions.info import TripInfoExtractor
 from .models import TripInfo
 from .exceptions import WaymoClientError
 
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 logger = get_logger(__name__)
 
 class WaymoClient:

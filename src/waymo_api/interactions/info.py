@@ -4,10 +4,10 @@ from datetime import datetime
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import TimeoutException
-from core.models import TripInfo
-from core.exceptions import WaymoClientError
+from ..core.models import TripInfo
+from ..core.exceptions import WaymoClientError
 
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 logger = get_logger(__name__)
 
 class TripInfoExtractor:

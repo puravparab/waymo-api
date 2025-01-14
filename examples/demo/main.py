@@ -1,12 +1,16 @@
+import sys
 import json
 import argparse
 from pathlib import Path
 from typing import List, Dict
 from concurrent.futures import ThreadPoolExecutor
 
-from core.client import WaymoClient
-from core.exceptions import WaymoClientError
-from utils.logger import setup_logger, get_logger
+root = Path(__file__).parent.parent.parent
+sys.path.append(str(root))
+
+from src.waymo_api.core.client import WaymoClient
+from src.waymo_api.core.exceptions import WaymoClientError
+from src.waymo_api.utils.logger import setup_logger
 
 def parse_arguments():
 	parser = argparse.ArgumentParser(description='Get Waymo trip inputs')
@@ -103,8 +107,7 @@ def print_trip_result(result: Dict):
 		print(f"Error: {result['error']}")
 
 def main():
-	project_root = Path(__file__).parent
-	log_dir = project_root / "logs"
+	log_dir = root / "logs"
 	log_file = log_dir / "main.log"
 	setup_logger(log_level="INFO", log_file=str(log_file))
 

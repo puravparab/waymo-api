@@ -6,7 +6,7 @@ from appium.options.android import UiAutomator2Options
 from selenium.webdriver.support.ui import WebDriverWait
 from .exceptions import WaymoClientError
 
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 logger = get_logger(__name__)
 
 class AppiumDriverManager:
