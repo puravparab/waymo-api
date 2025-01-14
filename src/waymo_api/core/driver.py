@@ -6,7 +6,7 @@ from appium.options.android import UiAutomator2Options
 from selenium.webdriver.support.ui import WebDriverWait
 from .exceptions import WaymoClientError
 
-from utils.logger import get_logger
+from ..utils.logger import get_logger
 logger = get_logger(__name__)
 
 class AppiumDriverManager:
@@ -32,6 +32,7 @@ class AppiumDriverManager:
 			options.set_capability('skipDeviceInitialization', True)
 			options.set_capability('autoGrantPermissions', True)
 			options.set_capability('disableWindowAnimation', True)
+			options.set_capability('disableAndroidWatchers', True) 
 			return options
 
 		except Exception as e:
@@ -41,13 +42,12 @@ class AppiumDriverManager:
 	def connect(self) -> None:
 		"""Establish connection to Appium server and initialize driver"""
 		try:
-			logger.info("Connecting to Appium server...")
 			logger.info("Connecting to Appium...")
 			options = self._setup_driver()
 			self.driver = webdriver.Remote('http://localhost:4723', options=options)
 			self.wait = WebDriverWait(self.driver, self.timeout)
 			logger.info("Connected successfully to Appium")
-			self._handle_app_state
+			self._handle_app_state()
 		except Exception as e:
 			logger.error(f"Failed to connect to Appium: {str(e)}")
 			self.quit()
