@@ -69,14 +69,9 @@ class WaymoActions:
 			search_input.send_keys(dropoff)
 
 			logger.info("Selecting dropoff location...")
-			try:
-				result = self.wait.until(EC.presence_of_element_located((
-					AppiumBy.XPATH, "//android.widget.LinearLayout[@clickable='true'][.//android.widget.TextView[@resource-id='com.waymo.carapp:id/location_title']][1]"
-				)))
-			except TimeoutException:
-				result = self.wait.until(EC.presence_of_element_located((
-					AppiumBy.XPATH, "//android.widget.LinearLayout[@clickable='true'][1]"
-				)))
+			result = self.wait.until(EC.presence_of_element_located((
+				AppiumBy.XPATH, "//android.widget.LinearLayout[@clickable='true'][.//android.widget.TextView[@resource-id='com.waymo.carapp:id/location_title']][1]"
+			)))
 			result.click()
 			logger.info(f"Selected dropoff: {dropoff}")
 
