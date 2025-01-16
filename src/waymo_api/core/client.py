@@ -2,7 +2,7 @@ from typing import Optional
 import logging
 from .driver import AppiumDriverManager
 from ..interactions.actions import WaymoActions
-from ..interactions.info import TripInfoExtractor
+from ..interactions.extractor import TripInfoExtractor
 from .models import TripInfo
 from .exceptions import WaymoClientError
 

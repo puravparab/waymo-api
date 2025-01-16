@@ -116,6 +116,6 @@ class TripInfoExtractor:
 			logger.info(f"Successfully extracted trip info: {trip_info}")
 			return trip_info
 
-		except TimeoutException as e:
-			logger.error(f"Timeout while extracting trip information: {str(e)}")
+		except Exception as e:
+			logger.error(f"Error while extracting trip information: {str(e)}")
 			raise WaymoClientError(f"Failed to extract trip information: {str(e)}")
