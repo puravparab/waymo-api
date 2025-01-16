@@ -100,7 +100,16 @@ For future uses, you can spin up the virtual device with the Waymo One applicati
 1. If you want to use Waymo in a different location do this. (You will need to download [adb](#android-debug-bridge))
 	```
 	adb emu geo fix <longitude> <latitude>
+
+	adb emu geo fix -122.431297 37.773972 // San Francisco
+
+	adb emu geo fix -118.243683 34.052235 // Los Angeles
+
+	adb emu geo fix -112.074036 33.448376 // Phoenix
+
+	adb emu geo fix -97.733330 30.266666 // Austin
 	```
+	
 #### Save screen state
 
 1. You'll need [adb](#android-debug-bridge) for this
