@@ -1,4 +1,5 @@
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import TimeoutException
 from ..core.exceptions import WaymoClientError
@@ -23,6 +24,16 @@ class WaymoActions:
 			logger.error(f"Failed to return to home screen: {str(e)}")
 			raise WaymoClientError("Could not return to home screen")
 	
+	def _handle_multiple_points(self) -> None:
+		"""Handle multiple pickup/dropoff points screen"""
+		try:
+			quick_wait = WebDriverWait(self.driver, 2)
+			confirm_button = quick_wait.until(EC.element_to_be_clickable((AppiumBy.ID, "com.waymo.carapp:id/confirm_button")))
+			confirm_button.click()
+			logger.info("Multiple points screen handled")
+		except TimeoutException:
+			pass
+			
 	def enter_pickup_location(self, pickup: str):
 		"""Enter and select pickup location"""
 		try:
@@ -47,8 +58,10 @@ class WaymoActions:
 			result.click()
 			logger.info(f"Selected pickup: {pickup}")
 
-		except TimeoutException as e:
-			logger.error(f"Timeout during pickup selection: {str(e)}")
+			self._handle_multiple_points()
+
+		except Exception as e:
+			logger.error(f"Error during pickup selection: {str(e)}")
 			self.return_to_home_screen
 			raise WaymoClientError(f"Pickup location entry failed: {str(e)}")
 
@@ -75,7 +88,9 @@ class WaymoActions:
 			result.click()
 			logger.info(f"Selected dropoff: {dropoff}")
 
-		except TimeoutException as e:
+			self._handle_multiple_points()
+
+		except Exception as e:
 			logger.error(f"Timeout during dropoff selection: {str(e)}")
 			self.return_to_home_screen
 			raise WaymoClientError(f"Dropoff location entry failed: {str(e)}")
