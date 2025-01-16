@@ -6,5 +6,9 @@
   {
     "pickup": "San Francisco City Hall",
     "dropoff": "Golden Gate Bridge Vista Point"
+  },
+  {
+    "pickup": "Salesforce Tower",
+    "dropoff": "Twin Peaks"
   }
 ]

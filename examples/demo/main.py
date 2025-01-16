@@ -49,12 +49,6 @@ def load_trips_from_json(file_path):
 	except FileNotFoundError:
 		raise ValueError(f"File not found: {file_path}")
 
-# def process_trips_parallel(trips: List[Dict[str, str]], max_workers: int) -> List[Dict]:
-# 	"""Process multiple trips in parallel"""
-# 	with ThreadPoolExecutor(max_workers=max_workers) as executor:
-# 		results = list(executor.map(process_single_trip, trips))
-# 	return results
-
 def process_trip(client: WaymoClient, pickup: str, dropoff: str) -> Dict:
 	"""Process a single trip and return results"""
 	try:
