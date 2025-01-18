@@ -14,14 +14,15 @@ Hilltop Park,Bayview,37.7328291,-122.3833628
 Bernal Heights Park,Bernal Heights,37.7435771,-122.412475
 Paul Revere Elementary School,Bernal Heights,37.7373148,-122.4131337
 Bret Harte Elementary,Bret Harte,37.7203479,-122.3918794
+Gilman Playground Park,Bret Harte,37.716656,-122.387913
 Buena Vista Park,Buena Vista,37.7703713,-122.4431784
 Mt. Olympus Stairs,Buena Vista,37.7633679,-122.4450328
-Candlestick Point Recreation Area,Candlestick Point SRA,37.7127107,-122.3815252
+Candlestick RV Park,Candlestick Point SRA,37.715753,-122.383352
 Castro Theatre,Castro,37.7620333,-122.4347591
 St. Mary's Cathedral,Cathedral Hill,37.7842115,-122.4253924
 Balboa High School,Cayuga,37.7215796,-122.4407711
 Crane Cove Park,Central Waterfront,37.7632701,-122.3873708
-Pier 94 Wetlands,Central Waterfront,37.7456073,-122.3764632
+SF Fire Station 25,Central Waterfront,37.7466,-122.386995
 The Midway,Central Waterfront,37.7492774,-122.3856944
 Portsmouth Square,Chinatown,37.7948896,-122.4052341
 Asian Art Museum,Civic Center,37.7802772,-122.4161605
@@ -76,6 +77,8 @@ The Brune Reutlinger Victorian Home,Hayes Valley,37.7771335,-122.4306751
 Holly Park,Holly Park,37.7373617,-122.424048
 San Jose Ave & Randall St,Holly Park,37.739855,-122.4240769
 Albion Castle,Hunters Point,37.7314866,-122.3756118
+Hunters Point Shipyard Artists,Hunters Point,37.728542,-122.366921
+Palou Ave & Crisp Rd,Hunters Point,37.727945,-122.380284
 India Basin Shoreline Park,India Basin,37.73415380000001,-122.3759418
 United States Postal Service India Basin,India Basin,37.739925,-122.381042
 Garfield St & Byxbee St,Ingleside,37.719662,-122.4698829
@@ -89,10 +92,9 @@ UCSF Dental Center,Inner Sunset,37.7618746,-122.4611074
 Geary Blvd & Webster St,Japantown,37.7847241,-122.4313223
 Florence Nightingale Statue,Laguna Honda,37.7477324,-122.4572608
 Richmond Basketball Courts,Lake Street,37.7850709,-122.4781216
-SF Golf Course Lakeshore,Lakeshore,37.7310071,-122.4977872
 San Francisco Zoo,Lakeshore,37.7329394,-122.5028348
-TPC Harding Park,Lakeshore,37.7248228,-122.4932023
-The Olympic Club,Lakeshore,37.7085911,-122.4932672
+Fleming 9 Course,Lakeshore,37.72563,-122.491058
+1100 Lake Merced Blvd,Lakeshore,37.712415,-122.48475
 Roosevelt Middle School,Laurel Heights / Jordan Park,37.7823715,-122.4585383
 San Francisco Fire Department Museum,Laurel Heights / Jordan Park,37.7857851,-122.4467017
 Lands End Lookout,Lincoln Park / Ft. Miley,37.779723,-122.5115887
@@ -115,6 +117,7 @@ Jerry Garcia Amphitheater,McLaren Park,37.7205263,-122.41731
 Randolph St & Arch St,Merced Heights,37.7142787,-122.4671261
 Lowell High School,Merced Manor,37.7304422,-122.4825763
 West Portal / Sloat/st,Merced Manor,37.7342313,-122.4719425
+Sloat Blvd & Sylvan Dr,Merced Manor,37.734193,-122.485553
 Olympia Way & Panorama Dr,Midtown Terrace,37.7512484,-122.4521538
 Market St & Guerrero St,Mint Hill,37.77071919999999,-122.4250102
 Miraloma Elementary School,Miraloma Park,37.7391659,-122.4503021
@@ -146,10 +149,13 @@ Minnie & Lovie Ward Recreation Center,Oceanview,37.7158129,-122.457577
 Mission St & Sickles Ave,Outer Mission,37.7087821,-122.4527783
 Anza Branch Library,Outer Richmond,37.7785234,-122.4972175
 Cabrillo St & La Playa St,Outer Richmond,37.7732606,-122.5100447
+Balboa St & 34th Ave,Outer Richmond,37.775791,-122.494199
+Geary Blvd & 20th Ave,Outer Richmond,37.780279,-122.479401
 Francis Scott Key Elementary School,Outer Sunset,37.7581754,-122.5022217
 Judah St & Sunset Blvd,Outer Sunset,37.7608886,-122.49569
 Ortega Branch Library,Outer Sunset,37.7511957,-122.4980659
 Sunset Reservoir,Outer Sunset,37.7509039,-122.4834721
+Great Highway Park,Outer Sunset,37.752855,-122.508447
 Sunset Tennis Courts,Outer Sunset,37.75668400000001,-122.4871451
 Taraval St & 42nd Ave,Outer Sunset,37.7420378,-122.5003675
 Alta Plaza Park,Pacific Heights,37.79120899999999,-122.4377047
@@ -161,6 +167,8 @@ Font Blvd & Cambon Dr,Parkmerced,37.715899,-122.474292
 J. Paul Leonard Library,Parkmerced,37.7213653,-122.4781364
 Abraham Lincoln High School,Parkside,37.7477191,-122.4802098
 Ulloa Elementary School,Parkside,37.73718059999999,-122.4997017
+Dianne Feinstein Elementary School,Parkside,37.739663,-122.481773
+Taraval St & 32nd Ave,Parkside,37.742449,-122.489649
 Mount Sutro Open Space Reserve,Parnassus Heights,37.7592201,-122.4572304
 UCSF Kalmanovitz Library,Parnassus Heights,37.7633027,-122.4590156
 Mullen Peralta Park,Peralta Heights,37.7461848,-122.4088464
@@ -199,6 +207,7 @@ Folsom St & 8th St,South of Market,37.7750021,-122.4100912
 SF MOMA,South of Market,37.7850246,-122.4005003
 SF Mint SOMA,South of Market,37.78287,-122.407074
 Salesforce Tower,South of Market,37.7897442,-122.3972337
+Harrison St & 4th St,South of Market,37.780587,-122.400088
 Terrace Green Park,St. Francis Wood,37.7369867,-122.465281
 Mission St & Murray Str,St. Marys Park,37.7336884,-122.4264161
 19th Ave & Winston Dr,Stonestown,37.7268659,-122.4750797
