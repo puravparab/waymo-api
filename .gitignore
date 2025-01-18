@@ -18,5 +18,8 @@ wheels/
 # Temp files
 window_dump.xml
 
+# Output files
+output/
+
 # Logs
 logs
