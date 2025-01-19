@@ -60,9 +60,9 @@ You will need this for changing the device location
 ### Usage
 
 Before you can use the API, you have to do three things
-- Spin up the Android virtual device
-- Start the appium server
-- Change location to desired Waymo service area (eg. San Francisco)
+- [Spin up](#start-the-android-virtual-device) the Android virtual device
+- [Start](#start-appium-server) the appium server
+- [Change location](#start-the-android-virtual-device) to desired Waymo service area (eg. San Francisco)
 
 #### Start the Android virtual device
 
@@ -131,7 +131,7 @@ uv run examples/demo/main.py --trips examples/demo/trips.json
 ```
 
 
-#### Developer Usage
+### Developer Usage
 
 #### Save screen state
 
