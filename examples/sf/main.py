@@ -99,6 +99,24 @@ def save_to_csv(data, output_file):
 			writer.writeheader()
 		writer.writerow(data)
 
+def save_error_to_csv(error_data, error_file):
+	"""Save error data to a separate CSV file"""
+	file_exists = Path(error_file).exists()
+	
+	headers = [
+		'timestamp',
+		'pickup_name',
+		'pickup_neighborhood',
+		'dropoff_name',
+		'dropoff_neighborhood',
+	]
+	
+	with open(error_file, 'a', newline='') as f:
+		writer = csv.DictWriter(f, fieldnames=headers)
+		if not file_exists:
+			writer.writeheader()
+		writer.writerow(error_data)
+
 def main():
 	log_dir = root / "logs"
 	log_file = log_dir / "sf_trips.log"
@@ -108,6 +126,7 @@ def main():
 	outputs_dir = root / "examples/sf/output"
 	outputs_dir.mkdir(exist_ok=True)
 	output_csv = outputs_dir / 'sf_waymo_estimates.csv'
+	error_csv = outputs_dir / 'sf_waymo_errors.csv'
 	
 	locations = load_locations(input_csv)
 	
@@ -128,12 +147,28 @@ def main():
 					print(f"Trip estimates data saved successfully: {pickup['name']} to {dropoff['name']}")
 					print(f"Price: ${trip_estimates['price_usd']:.2f}, Duration: {trip_estimates['trip_duration_mins']} mins")
 				else:
+					error_data = {
+						'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+						'pickup_name': pickup['name'],
+						'pickup_neighborhood': pickup['neighborhood'],
+						'dropoff_name': dropoff['name'],
+						'dropoff_neighborhood': dropoff['neighborhood'],
+					}
+					save_error_to_csv(error_data, error_csv)
 					print("Failed to get trip estimate data - skipping this pair")
 					
 			except KeyboardInterrupt:
 				print("\nStopping the script...")
 				break
 			except Exception as e:
+				error_data = {
+					'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+					'pickup_name': pickup['name'],
+					'pickup_neighborhood': pickup['neighborhood'],
+					'dropoff_name': dropoff['name'],
+					'dropoff_neighborhood': dropoff['neighborhood'],
+				}
+				save_error_to_csv(error_data, error_csv)
 				print(f"Unexpected error: {str(e)}")
 
 if __name__ == "__main__":
