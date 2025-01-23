@@ -29,6 +29,21 @@ def select_random_locations(locations):
 	pickup, dropoff = random.sample(locations, 2)
 	return pickup, dropoff
 
+def load_excluded_pairs(excluded_csv):
+	"""Load excluded location pairs from CSV file"""
+	df = pd.read_csv(excluded_csv)
+	pairs = df.apply(lambda row: {
+		'pickup': {
+			'name': row['pickup_name'],
+			'neighborhood': row['pickup_neighborhood']
+		},
+		'dropoff': {
+			'name': row['dropoff_name'],
+			'neighborhood': row['dropoff_neighborhood']
+		}
+	}, axis=1).tolist()
+	return pairs
+
 def get_trip_estimates(client, pickup, dropoff):
 	"""Get trip information using Waymo API"""
 	try:
@@ -123,23 +138,30 @@ def main():
 	setup_logger(log_level="INFO", log_file=str(log_file))
 
 	input_csv = root / "examples/sf/data/sf_locations.csv"
+	excluded_csv = root / "examples/sf/data/excluded_pairs.csv"
 	outputs_dir = root / "examples/sf/output"
 	outputs_dir.mkdir(exist_ok=True)
 	output_csv = outputs_dir / 'sf_waymo_estimates.csv'
 	error_csv = outputs_dir / 'sf_waymo_errors.csv'
 	
 	locations = load_locations(input_csv)
+	excluded_pairs = load_excluded_pairs(excluded_csv)
 	
 	# Initialize Waymo client
 	with WaymoClient() as client:
-		while True:
+		for pair in excluded_pairs:
 			try:
-				# Select random locations
-				pickup, dropoff = select_random_locations(locations)
+				pickup = pair['pickup']
+				dropoff = pair['dropoff']
+
 				print(f"\nGetting trip info for: {pickup['name']} → {dropoff['name']}")
 
+				# Find full location details from locations list
+				pickup_full = next(loc for loc in locations if loc['name'] == pickup['name'])
+				dropoff_full = next(loc for loc in locations if loc['name'] == dropoff['name'])
+
 				# Get trip estimates
-				trip_estimates = get_trip_estimates(client, pickup, dropoff)
+				trip_estimates = get_trip_estimates(client, pickup_full, dropoff_full)
 
 				# Save data if successful
 				if trip_estimates:
@@ -156,7 +178,7 @@ def main():
 					}
 					save_error_to_csv(error_data, error_csv)
 					print("Failed to get trip estimate data - skipping this pair")
-					
+
 			except KeyboardInterrupt:
 				print("\nStopping the script...")
 				break
