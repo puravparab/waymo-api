@@ -23,3 +23,6 @@ output/
 
 # Logs
 logs
+
+# Data
+excluded_pairs.csv

@@ -88,6 +88,7 @@ Make sure you have succesfully [set up](#setting-up-the-android-virtual-device) 
 
 4. After the device is started, change the device location to the desired Waymo service area. (Make sure you have downloaded [adb](#installing-android-debug-bridge))
 
+Note: This will take some time before the Waymo app changes the location (I recommend running this when the device is booting up)
 	```bash
 	// Select one of the following
 

@@ -1,7 +1,7 @@
 import sys
 import time
-import random
 import csv
+import random
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
@@ -24,10 +24,13 @@ def load_locations(csv_path):
 	}, axis=1).tolist()
 	return locations
 
-def select_random_locations(locations):
-	"""Select two random different locations"""
-	pickup, dropoff = random.sample(locations, 2)
-	return pickup, dropoff
+def create_random_location_pairs(locations, num_samples):
+	"""Create random pairs of locations"""
+	location_pairs = []
+	for _ in range(num_samples):
+		pickup, dropoff = random.sample(locations, 2)
+		location_pairs.append((pickup, dropoff))
+	return location_pairs
 
 def get_trip_estimates(client, pickup, dropoff):
 	"""Get trip information using Waymo API"""
@@ -129,13 +132,13 @@ def main():
 	error_csv = outputs_dir / 'sf_waymo_errors.csv'
 	
 	locations = load_locations(input_csv)
-	
+	location_pairs = create_random_location_pairs(locations, 2000)
+	print(f"Created {len(location_pairs)} location pairs")
+
 	# Initialize Waymo client
 	with WaymoClient() as client:
-		while True:
+		for pickup, dropoff in location_pairs:
 			try:
-				# Select random locations
-				pickup, dropoff = select_random_locations(locations)
 				print(f"\nGetting trip info for: {pickup['name']} → {dropoff['name']}")
 
 				# Get trip estimates
