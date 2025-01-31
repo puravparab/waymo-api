@@ -11,7 +11,8 @@ Before you get started, you'll need the following installed on your machine:
 
 - Android Studio
 - uv (Python package manager)
-- Python
+- Python 3.12
+- npm (for appium)
 
 #### Setting up the Android virtual device
 
@@ -116,7 +117,12 @@ We need appium so the API can talk to the virtual device
 	export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools
 	```
 
-2. Start appium
+2. Install appium
+	```bash
+	npm install -g appium
+	```
+
+3. Start appium
 	```bash
 	appium
 	```
