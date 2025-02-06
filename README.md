@@ -2,6 +2,17 @@
 
 Waymo doesn't have an API where you can get ride prices after entering pickup/dropoff points. This is an unofficial python api for Waymo that can be run locally to get realtime waymo ride prices. 
 
+### Usage
+
+Single trip
+```bash
+uv run examples/demo/main.py --trip "Fort Mason" "Salesforce Tower"
+```
+
+Multiple trips
+```bash
+uv run examples/demo/main.py --trips examples/demo/trips.json
+```
 
 ### Setup
 
@@ -138,7 +149,7 @@ uv run examples/demo/main.py --trips examples/demo/trips.json
 ```
 
 
-### Developer Usage
+### Troubleshooting
 
 #### Save screen state
 
