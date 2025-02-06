@@ -2,6 +2,8 @@
 
 Waymo doesn't have an API where you can get ride prices after entering pickup/dropoff points. This is an unofficial python api for Waymo that can be run locally to get realtime waymo ride prices. 
 
+This project was used to create a [dataset](https://www.kaggle.com/datasets/npurav/waymo-rides-estimates) of Waymo ride estimates
+
 ### Usage
 
 Single trip
