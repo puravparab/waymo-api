@@ -28,8 +28,8 @@ class AppiumDriverManager:
 			options.app_package = self.app_package
 			options.app_activity = self.app_activity
 			options.no_reset = True
-			options.set_capability('skipServerInstallation', True)
-			options.set_capability('skipDeviceInitialization', True)
+			options.set_capability('skipServerInstallation', False) # set to True once device is initialized for speedup
+			options.set_capability('skipDeviceInitialization', False) # set to True once device is initialized for speedup
 			options.set_capability('autoGrantPermissions', True)
 			options.set_capability('disableWindowAnimation', True)
 			options.set_capability('disableAndroidWatchers', True) 
